@@ -1,21 +1,34 @@
+from pathlib import Path
 import joblib
 import numpy as np
 import streamlit as st
 
-# -----------------------------
-# PAGE CONFIG
-# -----------------------------
 st.set_page_config(page_title="Wine Quality Predictor", page_icon="🍷")
-
 st.title("🍷 Wine Quality Predictor")
 st.write("Enter the wine measurements below and click **Predict Quality**.")
 
-# -----------------------------
-# LOAD SAVED MODEL FILES
-# -----------------------------
-model = joblib.load("saved_models/model.pkl")
-scaler = joblib.load("saved_models/scaler.pkl")
-feature_names = joblib.load("saved_models/feature_names.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "saved_models"
+
+model_path = MODEL_DIR / "model.pkl"
+scaler_path = MODEL_DIR / "scaler.pkl"
+features_path = MODEL_DIR / "feature_names.pkl"
+
+if not model_path.exists():
+    st.error(f"Model file not found: {model_path}")
+    st.stop()
+
+if not scaler_path.exists():
+    st.error(f"Scaler file not found: {scaler_path}")
+    st.stop()
+
+if not features_path.exists():
+    st.error(f"Feature names file not found: {features_path}")
+    st.stop()
+
+model = joblib.load(model_path)
+scaler = joblib.load(scaler_path)
+feature_names = joblib.load(features_path)
 
 # -----------------------------
 # INPUT FORM
