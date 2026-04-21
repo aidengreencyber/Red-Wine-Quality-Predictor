@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 # -----------------------------
 # 1. LOAD DATA
 # -----------------------------
-file_path = "C:\\Users\\agree\\Personal\\Personal\\AI-Code\\Red-Wine-Quality\\winequality-red.csv"
+file_path = "C:\\Users\\winequality-red.csv"
 df = pd.read_csv(file_path, sep=";")
 
 # -----------------------------
